@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -19,6 +21,8 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "wms_operate_log", schema = "simple_wms", catalog = "")
+@DynamicInsert
+@DynamicUpdate
 @Data
 @Builder
 @AllArgsConstructor

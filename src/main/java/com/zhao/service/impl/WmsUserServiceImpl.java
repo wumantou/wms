@@ -2,6 +2,7 @@ package com.zhao.service.impl;
 
 import com.zhao.common.enums.UserExceptionEnum;
 import com.zhao.common.exception.ServiceException;
+import com.zhao.common.handle.RequestUtil;
 import com.zhao.dao.WmsUserRepository;
 import com.zhao.service.IWmsUserService;
 import com.zhao.vo.WmsUserVO;
@@ -26,8 +27,10 @@ public class WmsUserServiceImpl implements IWmsUserService {
         if (StringUtils.isBlank(wmsUserVO.getLoginName())) {
             throw new ServiceException(UserExceptionEnum.USER_LOGIN_NAME_NULL);
         }
-        wmsUserRepository.findByLoginName(wmsUserVO.getLoginName());
+        WmsUserVO loginUser = wmsUserRepository.findByLoginName(wmsUserVO.getLoginName());
+        RequestUtil.setUser(loginUser);
+        loginUser.setPassword(null);
 
-        return null;
+        return loginUser;
     }
 }
