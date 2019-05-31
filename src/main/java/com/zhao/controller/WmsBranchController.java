@@ -19,6 +19,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/branch")
+@CrossOrigin
 public class WmsBranchController extends BaseController {
     @Autowired
     private IWmsBranchService wmsBranchService;

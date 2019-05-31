@@ -10,6 +10,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 /**
  * @Version 1.0
  * @VersionDesc 初始版本
@@ -28,8 +30,13 @@ public class WmsUserServiceImpl implements IWmsUserService {
             throw new ServiceException(UserExceptionEnum.USER_LOGIN_NAME_NULL);
         }
         WmsUserVO loginUser = wmsUserRepository.findByLoginName(wmsUserVO.getLoginName());
-        RequestUtil.setUser(loginUser);
+
+        if (Objects.isNull(loginUser)) {
+            throw new ServiceException(UserExceptionEnum.USER_PASSWORD_ERROR);
+        }
+
         loginUser.setPassword(null);
+        RequestUtil.setUser(loginUser);
 
         return loginUser;
     }

@@ -20,6 +20,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/product")
+@CrossOrigin
 public class WmsProductController extends BaseController {
     @Autowired
     private IWmsProductService wmsProductService;

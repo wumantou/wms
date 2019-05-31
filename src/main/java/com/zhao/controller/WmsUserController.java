@@ -6,10 +6,7 @@ import com.zhao.service.IWmsProductService;
 import com.zhao.service.IWmsUserService;
 import com.zhao.vo.WmsUserVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Version 1.0
@@ -20,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/user")
+@CrossOrigin
 public class WmsUserController extends BaseController {
     @Autowired
     private IWmsUserService wmsUserService;

@@ -8,10 +8,7 @@ import com.zhao.vo.WmsOperateLogVO;
 import com.zhao.vo.WmsProductVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Version 1.0
@@ -22,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/operate")
+@CrossOrigin
 public class WmsOperateLogController extends BaseController {
     @Autowired
     private IWmsOperateLogService wmsOperateLogService;

@@ -26,7 +26,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             response.setContentType("application/json;charset=UTF-8");
             PrintWriter writer = response.getWriter();//.flush()
             writer.flush();
-            writer.print(JSON.toJSONString(new Result<>(GlobalStatusEnum.LOGIN_REQUIRED.getStatus(), GlobalStatusEnum.LOGIN_REQUIRED.getMsg(), null)));
+            writer.print(JSON.toJSONString(new Result<>(GlobalStatusEnum.LOGIN_REQUIRED.getStatus(), GlobalStatusEnum.LOGIN_REQUIRED.getMsg(), "")));
             return false;
         }
 
