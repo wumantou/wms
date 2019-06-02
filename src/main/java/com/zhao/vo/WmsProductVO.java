@@ -54,6 +54,10 @@ public class WmsProductVO {
     @Column(name = "is_delete")
     private String isDelete;
 
+    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
+    @JoinColumn(name="branch_id", insertable = false, updatable = false)
+    private WmsBranchVO wmsBranchVO;
+
 
     @Transient
     private Integer page;
