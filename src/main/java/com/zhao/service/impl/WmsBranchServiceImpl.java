@@ -1,7 +1,6 @@
 package com.zhao.service.impl;
 
 import com.zhao.common.enums.BranchExceptionEnum;
-import com.zhao.common.enums.ProductExceptionEnum;
 import com.zhao.common.exception.ServiceException;
 import com.zhao.dao.WmsBranchRepository;
 import com.zhao.service.IWmsBranchService;

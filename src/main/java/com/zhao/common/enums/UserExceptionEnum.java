@@ -1,7 +1,6 @@
 package com.zhao.common.enums;
 
 import com.zhao.common.exception.AbstractServiceException;
-import com.zhao.common.exception.ServiceException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

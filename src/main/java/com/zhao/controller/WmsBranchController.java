@@ -3,7 +3,6 @@ package com.zhao.controller;
 import com.zhao.common.base.BaseController;
 import com.zhao.common.base.Result;
 import com.zhao.service.IWmsBranchService;
-import com.zhao.service.IWmsUserService;
 import com.zhao.vo.WmsBranchVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

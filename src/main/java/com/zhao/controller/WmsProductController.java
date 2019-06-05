@@ -3,13 +3,10 @@ package com.zhao.controller;
 import com.zhao.common.base.BaseController;
 import com.zhao.common.base.Result;
 import com.zhao.service.IWmsProductService;
-import com.zhao.service.IWmsUserService;
 import com.zhao.vo.WmsProductVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * @Version 1.0

@@ -2,7 +2,6 @@ package com.zhao.controller;
 
 import com.zhao.common.base.BaseController;
 import com.zhao.common.base.Result;
-import com.zhao.service.IWmsProductService;
 import com.zhao.service.IWmsUserService;
 import com.zhao.vo.WmsUserVO;
 import org.springframework.beans.factory.annotation.Autowired;

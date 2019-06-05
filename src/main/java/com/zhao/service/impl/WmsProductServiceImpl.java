@@ -54,7 +54,7 @@ public class WmsProductServiceImpl implements IWmsProductService {
     @Override
     public Page<WmsProductVO> page(WmsProductVO wmsProductVO) {
 
-        int page = Objects.isNull(wmsProductVO.getPage()) ? 1 : wmsProductVO.getPage();
+        int page = Objects.isNull(wmsProductVO.getPage()) ? 0 : wmsProductVO.getPage();
         int size = Objects.isNull(wmsProductVO.getSize()) ? 10 : wmsProductVO.getSize();
 
         Pageable pageable = PageRequest.of(page, size);
