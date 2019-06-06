@@ -91,6 +91,9 @@ public class WmsProductServiceImpl implements IWmsProductService {
         if (!Objects.isNull(wmsProductVO.getPrice())) {
             newProduct.setPrice(wmsProductVO.getPrice());
         }
+        if (!Objects.isNull(wmsProductVO.getBranchId())) {
+            newProduct.setBranchId(wmsProductVO.getBranchId());
+        }
 
         wmsProductRepository.save(newProduct);
         return newProduct;
