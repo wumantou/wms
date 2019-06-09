@@ -37,6 +37,11 @@ public class WmsProductController extends BaseController {
         return ok(wmsProductService.update(wmsProductVO));
     }
 
+    @PostMapping("/delete")
+    public Result<WmsProductVO> delete(@RequestBody WmsProductVO wmsProductVO) {
+        return ok(wmsProductService.delete(wmsProductVO));
+    }
+
     @PostMapping("/count/add")
     public Result<WmsProductVO> addCount(@RequestBody WmsProductVO wmsProductVO) {
         return ok(wmsProductService.addCount(wmsProductVO));

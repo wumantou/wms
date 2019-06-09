@@ -14,9 +14,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum OperateExceptionEnum implements AbstractServiceException {
-
-
-
+    PRODUCT_ID_NULL(401, "商品id不能为空"),
     ;
 
     private Integer status;

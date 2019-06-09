@@ -1,5 +1,7 @@
 package com.zhao.service.impl;
 
+import com.zhao.common.enums.OperateExceptionEnum;
+import com.zhao.common.exception.ServiceException;
 import com.zhao.dao.WmsOperateLogRepository;
 import com.zhao.service.IWmsOperateLogService;
 import com.zhao.vo.WmsOperateLogVO;
@@ -10,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -38,5 +41,13 @@ public class WmsOperateLogServiceImpl implements IWmsOperateLogService {
 
             return null;
         }, pageable);
+    }
+
+    @Override
+    public List<WmsOperateLogVO> list(WmsOperateLogVO wmsOperateLogVO) {
+        if (Objects.isNull(wmsOperateLogVO.getProductId())) {
+            throw new ServiceException(OperateExceptionEnum.PRODUCT_ID_NULL);
+        }
+        return wmsOperateLogRepository.findAllByProductIdOrderByOperateTimeDesc(wmsOperateLogVO.getProductId());
     }
 }

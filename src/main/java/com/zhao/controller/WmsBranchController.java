@@ -7,6 +7,7 @@ import com.zhao.vo.WmsBranchVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -29,7 +30,7 @@ public class WmsBranchController extends BaseController {
     }
 
     @GetMapping("/list")
-    public Result<List<WmsBranchVO>> list() {
+    public Result<List<WmsBranchVO>> list(HttpServletRequest request) {
         return ok(wmsBranchService.findAll());
     }
 

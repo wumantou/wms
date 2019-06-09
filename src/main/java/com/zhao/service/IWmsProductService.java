@@ -18,6 +18,8 @@ public interface IWmsProductService {
 
     WmsProductVO update(WmsProductVO wmsProductVO);
 
+    WmsProductVO delete(WmsProductVO wmsProductVO);
+
     WmsProductVO addCount(WmsProductVO wmsProductVO);
 
     WmsProductVO reduceStock(WmsProductVO wmsProductVO);

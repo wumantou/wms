@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @Version 1.0
  * @VersionDesc 初始版本
@@ -23,8 +25,13 @@ public class WmsOperateLogController extends BaseController {
     private IWmsOperateLogService wmsOperateLogService;
 
     @PostMapping("/page")
-    public Result<Page<WmsOperateLogVO>> list(@RequestBody WmsOperateLogVO wmsOperateLogVO) {
+    public Result<Page<WmsOperateLogVO>> page(@RequestBody WmsOperateLogVO wmsOperateLogVO) {
         return ok(wmsOperateLogService.page(wmsOperateLogVO));
+    }
+
+    @PostMapping("/list")
+    public Result<List<WmsOperateLogVO>> list(@RequestBody WmsOperateLogVO wmsOperateLogVO) {
+        return ok(wmsOperateLogService.list(wmsOperateLogVO));
     }
 }
 
