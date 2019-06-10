@@ -34,9 +34,6 @@ public class WmsOperateLogVO {
     @Column(name = "user_id")
     private Integer userId;
     @Basic
-    @Column(name = "branch_id")
-    private Integer branchId;
-    @Basic
     @Column(name = "product_id")
     private Integer productId;
     @Basic
@@ -51,6 +48,10 @@ public class WmsOperateLogVO {
     @Basic
     @Column(name = "operate_time")
     private Date operateTime;
+
+    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
+    @JoinColumn(name="user_id", insertable = false, updatable = false)
+    private WmsUserVO wmsUserVO;
 
 
     @Transient

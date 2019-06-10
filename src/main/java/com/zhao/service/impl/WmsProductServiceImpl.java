@@ -1,5 +1,6 @@
 package com.zhao.service.impl;
 
+import com.zhao.common.enums.OperateEnum;
 import com.zhao.common.enums.ProductExceptionEnum;
 import com.zhao.common.exception.ServiceException;
 import com.zhao.common.handle.RequestUtil;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.Predicate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -60,13 +62,17 @@ public class WmsProductServiceImpl implements IWmsProductService {
         Pageable pageable = PageRequest.of(page, size);
 
         return wmsProductRepository.findAll((root, query, builder) -> {
+
+            Predicate condition = builder.equal(root.get("isDelete"), "0");
+
             if (StringUtils.isNotBlank(wmsProductVO.getProductName())) {
-                builder.like(root.get("productName"), "%" + wmsProductVO.getProductName() + "%");
+                condition = builder.and(condition, builder.like(root.get("productName"), "%" + wmsProductVO.getProductName() + "%"));
             }
             if (!Objects.isNull(wmsProductVO.getBranchId())) {
-                builder.equal(root.get("branchId"), wmsProductVO.getBranchId());
+                condition = builder.and(condition, builder.equal(root.get("branchId"), wmsProductVO.getBranchId()));
             }
-            builder.equal(root.get("isDelete"), "0");
+            //condition = builder.and(condition, builder.equal(root.get("isDelete"), "0"));
+            query.where(condition);
             return null;
         }, pageable);
     }
@@ -100,6 +106,18 @@ public class WmsProductServiceImpl implements IWmsProductService {
     }
 
     @Override
+    public WmsProductVO delete(WmsProductVO wmsProductVO) {
+
+        if (Objects.isNull(wmsProductVO.getId())) {
+            throw new ServiceException(ProductExceptionEnum.PRODUCT_ID_NULL);
+        }
+        WmsProductVO newProduct = wmsProductRepository.findById(wmsProductVO.getId()).orElseThrow(() -> new ServiceException(ProductExceptionEnum.PRODUCT_ID_NULL));
+        newProduct.setIsDelete("1");
+        wmsProductRepository.save(newProduct);
+        return newProduct;
+    }
+
+    @Override
     public WmsProductVO addCount(WmsProductVO wmsProductVO) {
 
         if (Objects.isNull(wmsProductVO.getId())) {
@@ -114,13 +132,12 @@ public class WmsProductServiceImpl implements IWmsProductService {
         wmsProductRepository.save(newProduct);
 
         WmsOperateLogVO operateLogVO = WmsOperateLogVO.builder()
-                .branchId(wmsProductVO.getBranchId())
                 .count(wmsProductVO.getAddCount())
                 .operateTime(new Date())
                 .productId(wmsProductVO.getId())
                 .remark(wmsProductVO.getRemark())
                 .userId(RequestUtil.getUser().getId())
-                .operate("addCount").build();
+                .operate(OperateEnum.ADD_COUNT.getOperate()).build();
 
         wmsOperateLogRepository.save(operateLogVO);
 
@@ -140,13 +157,12 @@ public class WmsProductServiceImpl implements IWmsProductService {
         wmsProductRepository.save(newProduct);
 
         WmsOperateLogVO operateLogVO = WmsOperateLogVO.builder()
-                .branchId(wmsProductVO.getBranchId())
                 .count(wmsProductVO.getReduceStock())
                 .operateTime(new Date())
                 .productId(wmsProductVO.getId())
                 .remark(wmsProductVO.getRemark())
                 .userId(RequestUtil.getUser().getId())
-                .operate("reduceStock").build();
+                .operate(OperateEnum.REDUCE_STOCK.getOperate()).build();
 
         wmsOperateLogRepository.save(operateLogVO);
 
