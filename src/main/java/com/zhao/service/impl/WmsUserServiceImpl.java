@@ -12,13 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
-/**
- * @Version 1.0
- * @VersionDesc 初始版本
- * @Author: jerrywu
- * @Date: 2019/5/13 20:18
- * @description:
- */
 @Service
 public class WmsUserServiceImpl implements IWmsUserService {
     @Autowired
@@ -31,7 +24,7 @@ public class WmsUserServiceImpl implements IWmsUserService {
         }
         WmsUserVO loginUser = wmsUserRepository.findByLoginName(wmsUserVO.getLoginName());
 
-        if (Objects.isNull(loginUser)) {
+        if (Objects.isNull(loginUser) || !loginUser.getPassword().equals(wmsUserVO.getPassword())) {
             throw new ServiceException(UserExceptionEnum.USER_PASSWORD_ERROR);
         }
 
